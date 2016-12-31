@@ -168,8 +168,8 @@ window.onload = function() {
         			else if(aka.isGround == false){
         				aka.frame = 3;
         			}
-        			if(frame % 450 == 0){
-        				aka.vx += 0.5;
+        			if(frame % 75 == 0){
+        				aka.vx += 0.125;
         			}
         		}
         		
@@ -186,21 +186,21 @@ window.onload = function() {
 				if(bg3.x <= -320){
 					bg3.x = bg1.x + bg1.width * 2;
 				}
-        		        		
+        		        
+        		var rnd = Math.random();        
+        				
         		//障害物制御
        			if(needle[0].x <= -needle[0].width){
-       				if(Math.random() > 0.8){
+       				if(rnd > 0.4){
        					needle[0].x = 320;
-       					needle[0].y = GROUND_LINE - needle[0].height - Math.round((Math.random() * 5)) * 32;
+       					needle[0].y = GROUND_LINE - needle[0].height - Math.round((Math.random() * 4)) * 32;
+       					if(needle[1].x <= -needle[1].width && rnd > 0.8){
+       					     needle[1].x = 320+160;
+       					     needle[1].y = GROUND_LINE - needle[1].height - Math.round((Math.random() * 4)) * 32;
+       					}
        				}
        			}
-       			if(needle[1].x <= -needle[0].width && needle[0].x <= 160 && needle[0].x > 140){
-       			     if(Math.random() > 0.8){
-       			         needle[1].x = 320;
-       			         needle[1].y = GROUND_LINE - needle[1].height - Math.round((Math.random() * 5)) * 32;
-       			     }
-       			}
-       			
+       		       			
        			for(j = 0; j < 2; j++){
        			     if(needle[j].x > -needle[j].width) {
        				     needle[j].x -= aka.vx;
@@ -226,11 +226,11 @@ window.onload = function() {
        			     }
        			}
        			
-       			if(frame % 300 == 150){
-       				if(Math.random() > 0.5){
+       			if(frame % 450 == 0){
+       				//if(Math.random() > 0.5){
        					mochi.x = 320;
-       					mochi.y = GROUND_LINE - mochi.height - (Math.random() * 3.5) * 32;
-       				}
+       					mochi.y = GROUND_LINE - mochi.height - (Math.random() * 4) * 32;
+       				//}
        			}
        			if(mochi.x > -mochi.width) {
        				 mochi.x -= aka.vx;
@@ -246,10 +246,10 @@ window.onload = function() {
 
        			for(k = 0; k < 3; k++){
        			     if(chicken[k].x <= -chicken[k].width){
-       				     if(Math.random() > 0.9){
+       				     //if(Math.random() > 0.9){
        					     chicken[k].x = 320;
-       					     chicken[k].y = GROUND_LINE - chicken[k].height - (Math.random() * 3.5) * 32;
-       				     }
+       					     chicken[k].y = GROUND_LINE - chicken[k].height - (Math.random() * 4.5) * 32;
+       				     //}
        			     }
        			     if(chicken[k].x > -chicken[k].width) {
        				     chicken[k].x -= aka.vx*(0.5 + k * 0.1);
@@ -270,7 +270,7 @@ window.onload = function() {
        			
        			if(frame % 300 == 0){
        				money.x = 320;
-       				money.y = GROUND_LINE - money.height - (Math.random() * 4) * 32;
+       				money.y = GROUND_LINE - money.height - (Math.random() * 4.5) * 32;
        			}
        			if(money.x > -money.width) {
        				money.x -= aka.vx * 1.5;
@@ -304,7 +304,6 @@ window.onload = function() {
         	
         	// ジャンプ処理
         	scene.addEventListener(Event.TOUCH_START, function(e) {
-        		if(e.x < 10 && e.y < 10){return;}
         		if(aka.jumpCount > 1){return;}
         		if(aka.alive == false){return;}
         		aka.vy = -23;
